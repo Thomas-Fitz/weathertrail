@@ -17,23 +17,36 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class step {
+public class Step {
     private String durationString;
     private int durationSeconds;
-    private double endLocationLat;
-    private double endLocationLong;
+    private double[] endLocation = new double[2];
     private String htmlInstructions;
     private String polyline;
-    private double startLocationLat;
-    private double startLocationLong;
+    private double[] startLocation = new double[2];
     private String travel_mode;
     private String distanceString;
     private int distanceMeters;
     private String maneuver;
-    private List<Objects> substepList;
+    private List<Step> substepList = new ArrayList<>();
 
-    public step() {
-        this.substepList = new ArrayList<>();
+    public Step() {
+    }
+
+    public double[] getEndLocation() {
+        return endLocation;
+    }
+
+    public void setEndLocation(double[] endLocation) {
+        this.endLocation = endLocation;
+    }
+
+    public double[] getStartLocation() {
+        return startLocation;
+    }
+
+    public void setStartLocation(double[] startLocation) {
+        this.startLocation = startLocation;
     }
 
     public String getDurationString() {
@@ -52,21 +65,6 @@ public class step {
         this.durationSeconds = durationSeconds;
     }
 
-    public double getEndLocationLat() {
-        return endLocationLat;
-    }
-
-    public void setEndLocationLat(double endLocationLat) {
-        this.endLocationLat = endLocationLat;
-    }
-
-    public double getEndLocationLong() {
-        return endLocationLong;
-    }
-
-    public void setEndLocationLong(double endLocationLong) {
-        this.endLocationLong = endLocationLong;
-    }
 
     public String getHtmlInstructions() {
         return htmlInstructions;
@@ -84,21 +82,6 @@ public class step {
         this.polyline = polyline;
     }
 
-    public double getStartLocationLat() {
-        return startLocationLat;
-    }
-
-    public void setStartLocationLat(double startLocationLat) {
-        this.startLocationLat = startLocationLat;
-    }
-
-    public double getStartLocationLong() {
-        return startLocationLong;
-    }
-
-    public void setStartLocationLong(double startLocationLong) {
-        this.startLocationLong = startLocationLong;
-    }
 
     public String getTravel_mode() {
         return travel_mode;
@@ -132,11 +115,11 @@ public class step {
         this.maneuver = maneuver;
     }
 
-    public List<Objects> getSubstepList() {
+    public List<Step> getSubstepList() {
         return substepList;
     }
 
-    public void setSubstepList(List<Objects> substepList) {
+    public void setSubstepList(List<Step> substepList) {
         this.substepList = substepList;
     }
 }

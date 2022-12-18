@@ -1,4 +1,4 @@
 package co.weathertrail.weathertrail.models;
 
-public class leg {
+public class Route {
 }
