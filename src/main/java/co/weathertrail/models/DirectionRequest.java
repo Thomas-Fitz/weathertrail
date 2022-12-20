@@ -1,11 +1,15 @@
-package co.weathertrail.oldmodels;
+package co.weathertrail.models;
+
+import jakarta.validation.constraints.NotEmpty;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DirectionRequest {
+    @NotEmpty
     private String destination;
+    @NotEmpty
     private String origin;
     private boolean alternatives;
     private BigInteger arrivalTimeUnix;
