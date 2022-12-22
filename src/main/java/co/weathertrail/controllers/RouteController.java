@@ -1,7 +1,7 @@
 package co.weathertrail.controllers;
 
-import co.weathertrail.models.Direction;
-import co.weathertrail.models.DirectionRequest;
+import co.weathertrail.models.directions.Direction;
+import co.weathertrail.models.directions.DirectionRequest;
 import co.weathertrail.models.weather.WeatherResult;
 import co.weathertrail.services.RestDirectionService;
 import co.weathertrail.services.RestOpenMeteoService;

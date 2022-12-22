@@ -1,14 +1,10 @@
 package co.weathertrail.services;
 
 import co.weathertrail.KeyConfig;
-import co.weathertrail.models.Direction;
-import co.weathertrail.models.DirectionRequest;
-import jakarta.validation.Valid;
+import co.weathertrail.models.directions.Direction;
+import co.weathertrail.models.directions.DirectionRequest;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
-
-import java.io.ObjectInputFilter;
 
 @Component
 public class RestDirectionService implements DirectionService{
