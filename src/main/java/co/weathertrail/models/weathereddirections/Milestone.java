@@ -1,19 +1,37 @@
 package co.weathertrail.models.weathereddirections;
 
 public class Milestone {
-    private int step;
     private String locationName;
     private double latitude;
     private double longitude;
     private long timeInTrip;
-    private int distanceInTrip;
+    private long distanceInTrip;
     private long estimatedArrivalTimeUnix;
+    private String timezone;
+    private String timezoneAbbreviation;
+    private double elevation;
+    private long unixTime;
+    private String tempUnit;
+    private String precipitationUnit;
+    private String rainUnit;
+    private String showersUnit;
+    private String snowfallUnit;
+    private String snow_depthUnit;
+    private String visibilityUnit;
+    private double temp;
+    private double apparentTemp;
+    private double precipitation;
+    private double rain;
+    private double showers;
+    private double snowfall;
+    private double snow_depth;
+    private double visibility;
+
 
     public Milestone() {
     }
 
-    public Milestone(int step, String locationName, double latitude, double longitude, long timeInTrip, int distanceInTrip, long estimatedArrivalTimeUnix) {
-        this.step = step;
+    public Milestone(String locationName, double latitude, double longitude, long timeInTrip, long distanceInTrip, long estimatedArrivalTimeUnix) {
         this.locationName = locationName;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -22,13 +40,6 @@ public class Milestone {
         this.estimatedArrivalTimeUnix = estimatedArrivalTimeUnix;
     }
 
-    public int getStep() {
-        return step;
-    }
-
-    public void setStep(int step) {
-        this.step = step;
-    }
 
     public String getLocationName() {
         return locationName;
@@ -62,7 +73,7 @@ public class Milestone {
         this.timeInTrip = timeInTrip;
     }
 
-    public int getDistanceInTrip() {
+    public long getDistanceInTrip() {
         return distanceInTrip;
     }
 
