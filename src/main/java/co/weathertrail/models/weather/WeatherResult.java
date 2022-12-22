@@ -32,8 +32,8 @@ public class WeatherResult {
     private Double generationtimeMs;
     @JsonProperty("utc_offset_seconds")
     private Integer utcOffsetSeconds;
-    @JsonProperty("timezone")
-    private String timezone;
+     @JsonProperty("timezone")
+     private String timezone;
     @JsonProperty("timezone_abbreviation")
     private String timezoneAbbreviation;
     @JsonProperty("elevation")
