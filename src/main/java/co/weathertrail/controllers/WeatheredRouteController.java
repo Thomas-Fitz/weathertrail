@@ -26,42 +26,6 @@ public class WeatheredRouteController {
     }
 
 
-//    public List<Milestone> getWeatheredDirection (Direction direction) {
-//        List<Milestone> milestoneList = new ArrayList<>();
-//        int distanceCounter = 0;
-//        int durationCounter = 0;
-//        int distanceInTrip = 0;
-//        int durationInTrip = 0;
-//        List<Route> routeList = direction.getRoutes();
-//        Route route = routeList.get(0);
-//        Leg leg = route.getLegs().get(0);
-//        List<Step> steps = leg.getSteps();
-//
-//        // get first milestone and add to array
-//        milestoneList.add(getMilestoneForLocation(steps.get(0), Instant.now().getEpochSecond(), durationCounter, distanceCounter));
-//
-//        // iterate through direction's steps
-//        for (int i = 1; i < steps.size(); i++) {
-//            Step step = steps.get(i);
-//            // if distanceCounter > n || durationCounter > n
-//            if (distanceCounter > 16000 || durationCounter > 3600) {
-//                milestoneList.add(getMilestoneForLocation(step, Instant.now().getEpochSecond(), Instant.now().getEpochSecond() + durationInTrip, distanceInTrip ));
-//                distanceCounter = 0;
-//                durationCounter = 0;
-//                distanceInTrip += step.getDistance().getValue();
-//                durationInTrip += step.getDuration().getValue();
-//                continue;
-//            }
-//            distanceCounter += step.getDistance().getValue();
-//            durationCounter += step.getDuration().getValue();
-//            distanceInTrip += step.getDistance().getValue();
-//            durationInTrip += step.getDuration().getValue();
-//        }
-//
-//        // return array
-//        return milestoneList;
-//    }
-
     public List<Milestone> getWeatheredDirection (Direction direction) {
         List<Milestone> milestoneList = new ArrayList<>();
         int distanceCounter = 0;
@@ -72,16 +36,23 @@ public class WeatheredRouteController {
         Route route = routeList.get(0);
         Leg leg = route.getLegs().get(0);
         List<Step> steps = leg.getSteps();
+        long currentTime = Instant.now().getEpochSecond();
+        WeatherResult newWeatherResult = restOpenMeteoService.getWeatherResult(steps.get(0).getStartLocation().getLat(), steps.get(0).getStartLocation().getLng(), currentTime);
 
         // get first milestone and add to array
-        milestoneList.add(getMilestoneForLocation(steps.get(0), Instant.now().getEpochSecond(), durationCounter, distanceCounter));
+        milestoneList.add(getMilestoneForLocation(steps.get(0), currentTime, durationCounter, distanceCounter, newWeatherResult));
 
         // iterate through direction's steps
         for (int i = 1; i < steps.size(); i++) {
             Step step = steps.get(i);
+            if (distanceCounter > 16000 || durationCounter > 3600) {
+                newWeatherResult = restOpenMeteoService.getWeatherResult(step.getStartLocation().getLat(), step.getStartLocation().getLng(), currentTime + durationInTrip);
+            }
 
-            milestoneList.add(getMilestoneForLocation(step, Instant.now().getEpochSecond(), Instant.now().getEpochSecond() + durationInTrip, distanceInTrip ));
+            milestoneList.add(getMilestoneForLocation(step, currentTime, currentTime + durationInTrip, distanceInTrip, newWeatherResult));
 
+            distanceCounter += step.getDistance().getValue();
+            durationCounter += step.getDuration().getValue();
             distanceInTrip += step.getDistance().getValue();
             durationInTrip += step.getDuration().getValue();
         }
@@ -90,12 +61,11 @@ public class WeatheredRouteController {
         return milestoneList;
     }
 
-    public Milestone getMilestoneForLocation(Step step, long unixTime, long timeInTrip, long distanceInTrip) {
+    public Milestone getMilestoneForLocation(Step step, long unixTime, long timeInTrip, long distanceInTrip, WeatherResult newWeatherResult) {
         double stepLatitude = step.getStartLocation().getLat();
         double stepLongitude = step.getStartLocation().getLng();
 
         // get weather for location and time
-        WeatherResult newWeatherResult = restOpenMeteoService.getWeatherResult(stepLatitude, stepLongitude, unixTime);
         List<Integer> time = newWeatherResult.getHourly().getTime();
         List<Double> temperature2m = newWeatherResult.getHourly().getTemperature2m();
         List<Integer> relativehumidity2m = newWeatherResult.getHourly().getRelativehumidity2m();
@@ -111,7 +81,7 @@ public class WeatheredRouteController {
         Hourly hourlyForecast = newWeatherResult.getHourly();
 
         // create milestone object with blank weatherresults
-        Milestone newMilestone = new Milestone(step.getHtmlInstructions(), stepLatitude, stepLongitude, timeInTrip, distanceInTrip, unixTime);
+        Milestone newMilestone = new Milestone(step.getHtmlInstructions(), step.getManeuver(), step.getDistance(), step.getDuration(), stepLatitude, stepLongitude, timeInTrip, distanceInTrip, unixTime);
 
         // set milestone units of measurement from WeatherResult object
         newMilestone.setTempUnit(unitMap.getTemperature2m());

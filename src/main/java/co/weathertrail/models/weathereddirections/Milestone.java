@@ -1,9 +1,15 @@
 package co.weathertrail.models.weathereddirections;
 
+import co.weathertrail.models.directions.Distance__1;
+import co.weathertrail.models.directions.Duration__1;
+
 public class Milestone {
     private String locationName;
+    private String maneuver;
     private double latitude;
     private double longitude;
+    private Distance__1 stepDistance;
+    private Duration__1 stepDuration;
     private long timeInTrip;
     private long distanceInTrip;
     private long estimatedArrivalTimeUnix;
@@ -29,11 +35,15 @@ public class Milestone {
     private double humidity;
 
 
+
     public Milestone() {
     }
 
-    public Milestone(String locationName, double latitude, double longitude, long timeInTrip, long distanceInTrip, long estimatedArrivalTimeUnix) {
+    public Milestone(String locationName, String maneuver, Distance__1 stepDistance, Duration__1 stepDuration, double latitude, double longitude, long timeInTrip, long distanceInTrip, long estimatedArrivalTimeUnix) {
         this.locationName = locationName;
+        this.maneuver = maneuver;
+        this.stepDistance = stepDistance;
+        this.stepDuration = stepDuration;
         this.latitude = latitude;
         this.longitude = longitude;
         this.timeInTrip = timeInTrip;
@@ -252,5 +262,29 @@ public class Milestone {
 
     public void setHumidity(double humidity) {
         this.humidity = humidity;
+    }
+
+    public Distance__1 getStepDistance() {
+        return stepDistance;
+    }
+
+    public void setStepDistance(Distance__1 stepDistance) {
+        this.stepDistance = stepDistance;
+    }
+
+    public Duration__1 getStepDuration() {
+        return stepDuration;
+    }
+
+    public void setStepDuration(Duration__1 stepDuration) {
+        this.stepDuration = stepDuration;
+    }
+
+    public String getManeuver() {
+        return maneuver;
+    }
+
+    public void setManeuver(String maneuver) {
+        this.maneuver = maneuver;
     }
 }
