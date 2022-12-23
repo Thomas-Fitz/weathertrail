@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: co.weathertrail.WeathertrailApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.096 s - in co.weathertrail.WeathertrailApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.831 s - in co.weathertrail.WeathertrailApplicationTests
