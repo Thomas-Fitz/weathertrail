@@ -1,6 +1,6 @@
 package co.weathertrail.resources;
 
-import co.weathertrail.oldmodels.Direction;
+import co.weathertrail.models.directions.Direction;
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
