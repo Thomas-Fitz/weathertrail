@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
+
 public class RestDirectionService implements DirectionService{
     public static String API_BASE_URL = "https://maps.googleapis.com/maps/api/directions/json?";
     private RestTemplate restTemplate = new RestTemplate();
@@ -15,6 +16,7 @@ public class RestDirectionService implements DirectionService{
 
 
 
+    // CALL G-MAPS AND RETURN A DIRECTION OBJECT WITH SUB-OBJECTS
     @Override
     public Direction getDirection(DirectionRequest directionRequest) {
 
