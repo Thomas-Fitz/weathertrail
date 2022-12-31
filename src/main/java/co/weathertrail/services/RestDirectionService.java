@@ -8,7 +8,6 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class RestDirectionService implements DirectionService{
-    // public static String API_BASE_URL = "https://maps.googleapis.com/maps/api/directions/json?origin=Chicago,IL&destination=Portsmouth,NH&key=AIzaSyAiKDGatxgh_OdMKnQwKeIk3WL3v1_BVfk";
     public static String API_BASE_URL = "https://maps.googleapis.com/maps/api/directions/json?";
     private RestTemplate restTemplate = new RestTemplate();
     private KeyConfig keyConfig = new KeyConfig();
