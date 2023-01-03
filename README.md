@@ -72,7 +72,6 @@ A KeyConfig class file must be created and stored in the co.weathertrail directo
     getMilestoneForLocation(Step step, long unixTime, long timeInTrip, long distanceInTrip, WeatherResult newWeatherResult):
         Receive details of a step from a Direction object. Create a milestone object for the step. Get weather details for the new Milestone. Return a complete Milestone object.
 
-**WeatheredRouteController**
 
 ## Services
     **RestDirectionService**
